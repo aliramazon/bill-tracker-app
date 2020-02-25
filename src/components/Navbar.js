@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 
-const Navbar = () => {
+const Navbar = ({ categories, handlePlusClick }) => {
   return (
     <nav className="top-navigation">
       <div className="top-navigation__actions">
@@ -13,15 +13,19 @@ const Navbar = () => {
         >
           All
         </div>
-        <div
-          className={classnames(
-            "top-navigation__filter",
-            false && "top-navigation__filter--selected"
-          )}
-        >
-          Electricity
+        {categories.map(category => (
+          <div
+            className={classnames(
+              "top-navigation__filter",
+              false && "top-navigation__filter--selected"
+            )}
+          >
+            {category}
+          </div>
+        ))}
+        <div className="top-navigation__icon" onClick={handlePlusClick}>
+          &#43;
         </div>
-        <div className="top-navigation__icon">&#43;</div>
       </div>
     </nav>
   );

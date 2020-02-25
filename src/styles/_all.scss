@@ -1,12 +1,14 @@
+// Overall Layout
 .container {
   display: grid;
   grid-template-rows: max-content max-content;
 
   width: 100rem;
   background-color: $color-grey-light-1;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem;
 }
 
+// Top Navigation
 .top-navigation {
   justify-self: center;
 
@@ -15,7 +17,9 @@
 
   &__actions {
     display: grid;
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: max-content max-content;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
     column-gap: 2rem;
     align-items: center;
   }
@@ -39,12 +43,62 @@
   }
 }
 
+// Main Content
+
 .main-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 2rem;
+
+  padding: 3rem 2rem;
 }
 
-.bills-table-section {
+// Bills Table
+.bills-table__section {
   background-color: $color-white;
+}
+
+// Add  Category
+
+.add-category {
+  &__section {
+    background-color: $color-white;
+    padding: 3rem 2rem;
+
+    display: grid;
+    grid-template-rows: repeat(3, max-content);
+    row-gap: 2rem;
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr 10rem;
+    grid-column-gap: 2rem;
+  }
+
+  &__input {
+    outline: none;
+    height: 3rem;
+    border-radius: 0.3rem;
+    border: 1px solid $color-grey-light-2;
+    padding: 0 1rem;
+  }
+
+  &__submit {
+    background-color: $color-primary;
+    color: $color-white;
+    font-size: 1.4rem;
+    border: none;
+    border-radius: 0.3rem;
+  }
+}
+
+// Typography
+h1 {
+  font-size: 3rem;
+  line-height: 85%;
+}
+
+p {
+  font-size: 1.4rem;
 }
