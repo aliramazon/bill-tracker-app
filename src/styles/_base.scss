@@ -34,3 +34,9 @@ body {
   font-weight: 300;
   line-height: 1.6;
 }
+
+#root {
+  display: grid;
+  justify-items: center;
+  padding: 1rem 0;
+}
