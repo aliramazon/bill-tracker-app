@@ -13,8 +13,9 @@ const Navbar = ({ categories, handlePlusClick }) => {
         >
           All
         </div>
-        {categories.map(category => (
+        {categories.map((category, idx) => (
           <div
+            key={idx}
             className={classnames(
               "top-navigation__filter",
               false && "top-navigation__filter--selected"
