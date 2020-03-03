@@ -20,11 +20,11 @@ const AddCategory = ({ handleAddCategory }) => {
       <form className="add-category__form" onSubmit={handleOnSubmit}>
         <input
           type="text"
-          className="add-category__input"
+          className="input"
           onChange={handleOnChange}
           value={category}
         />
-        <input type="submit" value="Add" className="add-category__submit" />
+        <input type="submit" value="Add" className="button" />
       </form>
     </section>
   );

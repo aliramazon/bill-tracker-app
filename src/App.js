@@ -3,10 +3,12 @@ import { Navbar } from "./components/Navbar";
 import { BillsTable } from "./components/BillsTable";
 import { Chart } from "./components/Chart";
 import { AddCategory } from "./components/AddCategory";
+import { AddBill } from "./components/AddBill";
 
 const App = () => {
   const [shouldShowAddCategory, setShouldShowAddCategory] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [shouldShowAddBill, setShouldShowAddBill] = useState(false);
 
   useEffect(() => {
     const savedCategories = localStorage.getItem("categories");
@@ -28,15 +30,27 @@ const App = () => {
   const handlePlusClick = () => {
     setShouldShowAddCategory(true);
   };
+
+  const handleAddNewBill = () => {
+    setShouldShowAddBill(true);
+  };
+
+  const handleCancelAddBill = () => {
+    setShouldShowAddBill(false);
+  };
   return (
     <div className="container">
-      {shouldShowAddCategory ? (
+      {shouldShowAddCategory && (
         <AddCategory handleAddCategory={handleAddCategory} />
-      ) : (
+      )}
+      {shouldShowAddBill && (
+        <AddBill handleCancelAddBill={handleCancelAddBill} />
+      )}
+      {!shouldShowAddBill && !shouldShowAddCategory && (
         <>
           <Navbar categories={categories} handlePlusClick={handlePlusClick} />
           <div className="main-content">
-            <BillsTable />
+            <BillsTable handleAddNewBill={handleAddNewBill} />
             <Chart />
           </div>
         </>
