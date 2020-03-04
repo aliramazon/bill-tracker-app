@@ -9,6 +9,7 @@ const App = () => {
   const [shouldShowAddCategory, setShouldShowAddCategory] = useState(true);
   const [categories, setCategories] = useState([]);
   const [shouldShowAddBill, setShouldShowAddBill] = useState(false);
+  const [bills, setBills] = useState([]);
 
   useEffect(() => {
     const savedCategories = localStorage.getItem("categories");
@@ -38,13 +39,23 @@ const App = () => {
   const handleCancelAddBill = () => {
     setShouldShowAddBill(false);
   };
+
+  const saveNewBill = bill => {
+    console.log(bill);
+    setShouldShowAddBill(false);
+  };
+
   return (
     <div className="container">
       {shouldShowAddCategory && (
         <AddCategory handleAddCategory={handleAddCategory} />
       )}
       {shouldShowAddBill && (
-        <AddBill handleCancelAddBill={handleCancelAddBill} />
+        <AddBill
+          handleCancelAddBill={handleCancelAddBill}
+          categories={categories}
+          saveNewBill={saveNewBill}
+        />
       )}
       {!shouldShowAddBill && !shouldShowAddCategory && (
         <>
