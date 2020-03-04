@@ -1,6 +1,7 @@
 import React from "react";
 
 const BillsTable = ({ bills, handleAddNewBill }) => {
+  console.log(bills);
   return (
     <section className="bills-table__section">
       <div className="bills-table__head">
@@ -12,18 +13,17 @@ const BillsTable = ({ bills, handleAddNewBill }) => {
         <span onClick={handleAddNewBill}>Add new</span>
       </div>
       <div className="bills-table__body">
-        <div className="bills-table__row">
-          <div>Jul 4 2018</div>
-          <div>$100</div>
-          <div>Electricity</div>
-          <div>X</div>
-        </div>
-        <div className="bills-table__row">
-          <div>Jul 4 2018</div>
-          <div>$100</div>
-          <div>Electricity</div>
-          <div>X</div>
-        </div>
+        {bills &&
+          bills.map((bill, index) => {
+            return (
+              <div className="bills-table__row" key={index}>
+                <div>Date</div>
+                <div>${bill.amount}</div>
+                <div>{bill.category}</div>
+                <div>X</div>
+              </div>
+            );
+          })}
       </div>
     </section>
   );

@@ -9,6 +9,10 @@ const AddBill = ({ handleCancelAddBill, saveNewBill, categories }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    if (!amount) {
+      alert("Please enter an amount");
+      return;
+    }
     saveNewBill({ category: selectedCategory, amount, date });
     setAmount(0);
     setSelectedCategory("");

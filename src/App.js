@@ -13,11 +13,19 @@ const App = () => {
 
   useEffect(() => {
     const savedCategories = localStorage.getItem("categories");
+    const savedBills = localStorage.getItem("bills");
+    console.log("hi", savedBills);
     if (savedCategories) {
       setCategories(JSON.parse(savedCategories));
       setShouldShowAddCategory(false);
     } else {
       setShouldShowAddCategory(true);
+    }
+
+    if (savedBills) {
+      setBills(JSON.parse(savedBills));
+    } else {
+      setBills([]);
     }
   }, []);
 
@@ -41,8 +49,10 @@ const App = () => {
   };
 
   const saveNewBill = bill => {
-    console.log(bill);
+    const updatedBills = [...bills, bill];
+    setBills(updatedBills);
     setShouldShowAddBill(false);
+    localStorage.setItem("bills", JSON.stringify(updatedBills));
   };
 
   return (
@@ -61,7 +71,7 @@ const App = () => {
         <>
           <Navbar categories={categories} handlePlusClick={handlePlusClick} />
           <div className="main-content">
-            <BillsTable handleAddNewBill={handleAddNewBill} />
+            <BillsTable handleAddNewBill={handleAddNewBill} bills={bills} />
             <Chart />
           </div>
         </>
