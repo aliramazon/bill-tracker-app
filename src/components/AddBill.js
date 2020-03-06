@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const AddBill = ({ handleCancelAddBill, saveNewBill, categories }) => {
+const AddBill = ({ triggerHideAddBill, saveNewBill, categories }) => {
   const [amount, setAmount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(categories[0] || "");
   const [date, setDate] = useState(new Date());
@@ -48,7 +48,7 @@ const AddBill = ({ handleCancelAddBill, saveNewBill, categories }) => {
           className="input"
         />
         <input type="submit" value="Save" className="button" />
-        <button className="button " onClick={handleCancelAddBill}>
+        <button className="button" onClick={triggerHideAddBill}>
           Cancel
         </button>
       </form>

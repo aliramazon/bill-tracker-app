@@ -40,11 +40,11 @@ const App = () => {
     setShouldShowAddCategory(true);
   };
 
-  const handleAddNewBill = () => {
+  const triggerShowAddBill = () => {
     setShouldShowAddBill(true);
   };
 
-  const handleCancelAddBill = () => {
+  const triggerHideAddBill = () => {
     setShouldShowAddBill(false);
   };
 
@@ -62,7 +62,7 @@ const App = () => {
       )}
       {shouldShowAddBill && (
         <AddBill
-          handleCancelAddBill={handleCancelAddBill}
+          triggerHideAddBill={triggerHideAddBill}
           categories={categories}
           saveNewBill={saveNewBill}
         />
@@ -71,7 +71,7 @@ const App = () => {
         <>
           <Navbar categories={categories} handlePlusClick={handlePlusClick} />
           <div className="main-content">
-            <BillsTable handleAddNewBill={handleAddNewBill} bills={bills} />
+            <BillsTable triggerShowAddBill={triggerShowAddBill} bills={bills} />
             <Chart />
           </div>
         </>
