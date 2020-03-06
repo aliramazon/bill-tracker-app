@@ -87,7 +87,7 @@ const App = () => {
               bills={bills}
               handleDeleteBill={deleteBill}
             />
-            <Chart />
+            <Chart bills={bills} />
           </div>
         </>
       )}
