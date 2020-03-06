@@ -16,13 +16,13 @@ const BillsTable = ({ bills, triggerShowAddBill, handleDeleteBill }) => {
         {bills &&
           bills.map((bill, index) => {
             return (
-              <div className="bills-table__row" key={index}>
+              <div className="bills-table__row" key={bill.id}>
                 <div>
                   <Moment format="MMM D YYYY">{bill.date}</Moment>
                 </div>
                 <div>${bill.amount}</div>
                 <div>{bill.category}</div>
-                <div data-bill-idx={index}>X</div>
+                <div data-bill-idx={bill.id}>X</div>
               </div>
             );
           })}

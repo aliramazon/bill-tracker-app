@@ -10,6 +10,7 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [shouldShowAddBill, setShouldShowAddBill] = useState(false);
   const [bills, setBills] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("ALL");
 
   useEffect(() => {
     const savedCategories = localStorage.getItem("categories");
@@ -29,7 +30,9 @@ const App = () => {
   }, []);
 
   const handleAddCategory = category => {
-    const updatedCategory = [...categories, category];
+    if (categories.includes(category.toUpperCase()))
+      return alert("Category already exists");
+    const updatedCategory = [...categories, category.toUpperCase()];
     setCategories(updatedCategory);
     setShouldShowAddCategory(false);
     localStorage.setItem("categories", JSON.stringify(updatedCategory));
@@ -48,6 +51,7 @@ const App = () => {
   };
 
   const saveNewBill = bill => {
+    console.log(bill);
     const updatedBills = [...bills, bill];
     setBills(updatedBills);
     setShouldShowAddBill(false);
@@ -57,13 +61,17 @@ const App = () => {
   const deleteBill = e => {
     const { billIdx } = e.target.dataset;
     if (billIdx) {
-      const updatedBills = bills.filter(
-        (bill, idx) => idx !== parseInt(billIdx)
-      );
-      console.log(updatedBills);
+      const updatedBills = bills.filter(bill => bill.id !== billIdx);
+
       setBills(updatedBills);
       localStorage.setItem("bills", JSON.stringify(updatedBills));
     }
+  };
+
+  const getActiveBills = () => {
+    return bills.filter(bill =>
+      activeCategory === "ALL" ? true : activeCategory === bill.category
+    );
   };
 
   return (
@@ -80,14 +88,19 @@ const App = () => {
       )}
       {!shouldShowAddBill && !shouldShowAddCategory && (
         <>
-          <Navbar categories={categories} handlePlusClick={handlePlusClick} />
+          <Navbar
+            categories={categories}
+            handlePlusClick={handlePlusClick}
+            setActiveCategory={category => setActiveCategory(category)}
+            activeCategory={activeCategory}
+          />
           <div className="main-content">
             <BillsTable
               triggerShowAddBill={triggerShowAddBill}
-              bills={bills}
+              bills={getActiveBills()}
               handleDeleteBill={deleteBill}
             />
-            <Chart bills={bills} />
+            <Chart bills={getActiveBills()} />
           </div>
         </>
       )}

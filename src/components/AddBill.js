@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { v1 as uuidv1 } from "uuid";
 
 const AddBill = ({ triggerHideAddBill, saveNewBill, categories }) => {
   const [amount, setAmount] = useState(0);
@@ -13,7 +14,7 @@ const AddBill = ({ triggerHideAddBill, saveNewBill, categories }) => {
       alert("Please enter an amount");
       return;
     }
-    saveNewBill({ category: selectedCategory, amount, date });
+    saveNewBill({ category: selectedCategory, amount, date, id: uuidv1() });
     setAmount(0);
     setSelectedCategory("");
     setDate(new Date());
@@ -31,15 +32,14 @@ const AddBill = ({ triggerHideAddBill, saveNewBill, categories }) => {
           value={selectedCategory}
           onChange={e => setSelectedCategory(e.target.value)}
         >
-          {categories
-            ? categories.map((value, index) => {
-                return (
-                  <option value={value} key={index}>
-                    {value}
-                  </option>
-                );
-              })
-            : "Select"}
+          {categories &&
+            categories.map((value, index) => {
+              return (
+                <option value={value} key={index}>
+                  {value}
+                </option>
+              );
+            })}
         </select>
         <input
           type="text"

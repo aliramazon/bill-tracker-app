@@ -41,11 +41,11 @@ const Chart = ({ bills }) => {
         continue;
       }
       const monthName = moment(bill.date).format("MMMM");
-      console.log(monthName);
+
       const indexOfMonth = months.indexOf(monthName);
       monthsWithValues[indexOfMonth] += parseInt(bill.amount);
     }
-    console.log(monthsWithValues);
+
     return monthsWithValues;
   };
 
