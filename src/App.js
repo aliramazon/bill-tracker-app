@@ -14,7 +14,6 @@ const App = () => {
   useEffect(() => {
     const savedCategories = localStorage.getItem("categories");
     const savedBills = localStorage.getItem("bills");
-    console.log("hi", savedBills);
     if (savedCategories) {
       setCategories(JSON.parse(savedCategories));
       setShouldShowAddCategory(false);
@@ -55,6 +54,18 @@ const App = () => {
     localStorage.setItem("bills", JSON.stringify(updatedBills));
   };
 
+  const deleteBill = e => {
+    const { billIdx } = e.target.dataset;
+    if (billIdx) {
+      const updatedBills = bills.filter(
+        (bill, idx) => idx !== parseInt(billIdx)
+      );
+      console.log(updatedBills);
+      setBills(updatedBills);
+      localStorage.setItem("bills", JSON.stringify(updatedBills));
+    }
+  };
+
   return (
     <div className="container">
       {shouldShowAddCategory && (
@@ -71,7 +82,11 @@ const App = () => {
         <>
           <Navbar categories={categories} handlePlusClick={handlePlusClick} />
           <div className="main-content">
-            <BillsTable triggerShowAddBill={triggerShowAddBill} bills={bills} />
+            <BillsTable
+              triggerShowAddBill={triggerShowAddBill}
+              bills={bills}
+              handleDeleteBill={deleteBill}
+            />
             <Chart />
           </div>
         </>

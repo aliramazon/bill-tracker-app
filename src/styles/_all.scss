@@ -97,6 +97,10 @@
     font-size: 1.5rem;
     padding: 1rem;
     border-bottom: 1px solid $color-grey-light-1;
+
+    div:last-child {
+      cursor: pointer;
+    }
   }
 }
 
@@ -126,6 +130,9 @@
     display: grid;
     grid-template-rows: max-content max-content;
     row-gap: 2rem;
+
+    background-color: $color-white;
+    padding: 3rem 2rem;
   }
 
   &__form {

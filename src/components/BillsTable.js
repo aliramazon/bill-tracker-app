@@ -1,8 +1,7 @@
 import React from "react";
 import Moment from "react-moment";
 
-const BillsTable = ({ bills, triggerShowAddBill }) => {
-  console.log(bills);
+const BillsTable = ({ bills, triggerShowAddBill, handleDeleteBill }) => {
   return (
     <section className="bills-table__section">
       <div className="bills-table__head">
@@ -13,7 +12,7 @@ const BillsTable = ({ bills, triggerShowAddBill }) => {
       <div className="bills-table__add-new">
         <span onClick={triggerShowAddBill}>Add new</span>
       </div>
-      <div className="bills-table__body">
+      <div className="bills-table__body" onClick={handleDeleteBill}>
         {bills &&
           bills.map((bill, index) => {
             return (
@@ -23,7 +22,7 @@ const BillsTable = ({ bills, triggerShowAddBill }) => {
                 </div>
                 <div>${bill.amount}</div>
                 <div>{bill.category}</div>
-                <div>X</div>
+                <div data-bill-idx={index}>X</div>
               </div>
             );
           })}
