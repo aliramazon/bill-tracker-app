@@ -16,7 +16,7 @@ const AddCategory = ({ handleAddCategory }) => {
   return (
     <section className="add-category__section">
       <h1>Enter a category of bills</h1>
-      <p>E.g. 'Electricity' or 'Gas' or 'Internet</p>
+      <p>E.g. 'Electricity' or 'Gas' or 'Internet'.</p>
       <form className="add-category__form" onSubmit={handleOnSubmit}>
         <input
           type="text"
